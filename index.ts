@@ -11,7 +11,8 @@ async function main(blockId: string) {
   }
 
   const pageRegx = /^\[\[(.*)\]\]$/;
-  const firstLine = block.content.split("\n")[0].trim();
+  const headerRegx = /^#*/;
+  const firstLine = block.content.split("\n")[0].replace(headerRegx,"").trim()
   const pageName = firstLine.replace(pageRegx, "$1");
 
   let newBlockContent = "";
