@@ -2,7 +2,7 @@ import "@logseq/libs";
 import { BlockEntity, BlockIdentity } from "@logseq/libs/dist/LSPlugin.user";
 import { toBatchBlocks, mayBeReferenced } from "./util";
 
-async function main(blockId: string) {
+async function main(blockId: string, embedPage: boolean) {
   const block = await logseq.Editor.getBlock(blockId, {
     includeChildren: true,
   });
@@ -13,10 +13,11 @@ async function main(blockId: string) {
   const pageRegx = /^\[\[(.*)\]\]$/;
   const firstLine = block.content.split("\n")[0].trim();
   const pageName = firstLine.replace(pageRegx, "$1");
+  const replacementLine = embedPage ? `{{embed [[${firstLine}]]}}` : `[[${firstLine}]]`;
 
   let newBlockContent = "";
   if (!pageRegx.test(firstLine)) {
-    newBlockContent = block.content.replace(firstLine, `[[${firstLine}]]`);
+    newBlockContent = block.content.replace(firstLine, replacementLine);
   }
 
   await createPageIfNotExist(pageName);
@@ -60,10 +61,16 @@ async function main(blockId: string) {
 logseq
   .ready(() => {
     logseq.Editor.registerSlashCommand("Turn Into Page", async (e) => {
-      main(e.uuid);
+      main(e.uuid, false);
+    });
+    logseq.Editor.registerSlashCommand("Embed as Page", async (e) => {
+      main(e.uuid, true);
     });
     logseq.Editor.registerBlockContextMenuItem("Turn into page", async (e) => {
-      main(e.uuid);
+      main(e.uuid, false);
+    });
+    logseq.Editor.registerBlockContextMenuItem("Embed as Page", async (e) => {
+      main(e.uuid, true);
     });
   })
   .catch(console.error);
