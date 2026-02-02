@@ -72,28 +72,6 @@ logseq
     logseq.Editor.registerBlockContextMenuItem("Embed as Page", ({ blockId}) => {
       main(blockId, true);
     });
-
-    // logseq.App.registerCommandPalette(
-    //     {
-    //       key: "turn-into-page"
-    //       label: "Turn block into page",
-    //       keybinding: {binding: "mod+l", mode: "non-editing"},
-    //     },
-    //     async (e) => {
-    //       const block = await logseq.Editor.getCurrentBlock();
-    //       main(block.uuid,false)}
-    // );
-    // logseq.App.registerCommandPalette(
-    //     {
-    //       key: "embed-as-page",
-    //       label: "Embed as Page",
-    //       keybinding: {binding: "mod+shift+l", mode: "non-editing"},
-    //     },
-    //     async (e) => {
-    //       const block = await logseq.Editor.getCurrentBlock();
-    //       main(block.uuid,true);
-    //     }
-    // );
   })
   .catch(console.error);
 
