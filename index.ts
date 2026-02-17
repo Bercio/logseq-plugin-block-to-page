@@ -122,7 +122,7 @@ async function main(blockId: string, embedPage: boolean) {
 
 logseq
   .ready(() => {
-    logseq.useSettingsSchema([
+    logseq.ùpdateSettings([
       {
         key: "allowWithoutChildren",
         title: "Allow page without children",
@@ -142,7 +142,7 @@ logseq
         title: "Create first block",
         description: "Create a first block on an empty new page",
         type: "boolean",
-        default: true,
+        default: false,
       },
       {
         key: "moveBlockPropertiesToPage",
