@@ -13,7 +13,7 @@ async function main(blockId: string, embedPage: boolean) {
   const pageRegx = /^\[\[(.*)\]\]$/;
   const headerRegx = /^#*/;
   const allLines = srcBlock.content.split("\n");
-  const firstLine = allLines[0].replace.(headerRegx,"").trim();
+  const firstLine = allLines[0].replace(headerRegx,"").trim();
   const pageName = firstLine.replace(pageRegx, "$1");
 
   await createPageIfNotExist(pageName);
