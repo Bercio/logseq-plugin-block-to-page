@@ -122,7 +122,7 @@ async function main(blockId: string, embedPage: boolean) {
 
 logseq
   .ready(() => {
-    logseq.ùpdateSettings([
+    logseq.useSettingsSchema([
       {
         key: "allowWithoutChildren",
         title: "Allow page without children",
